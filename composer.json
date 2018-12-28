@@ -1,0 +1,44 @@
+{
+    "name": "iwouldrathercode/php-simple-coupons",
+    "description": "PHP package to help generates simple and unique coupon codes",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "coupons", 
+        "uniqd", 
+        "generator"
+    ],
+    "support": {
+        "issues": "https://github.com/iwouldrathercode/php-simple-coupons/issues",
+        "source": "https://github.com/iwouldrathercode/php-simple-coupons"
+    },
+    "authors": [
+        {
+            "name": "Shankar Ganesh",
+            "email": "psgganesh@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "monolog/monolog": "^1.24",
+        "symfony/var-dumper": "^4.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "7.4.4"
+    },
+    "autoload": {
+        "psr-4" : {
+            "Iwouldrathercode\\SimpleCoupons\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
