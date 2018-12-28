@@ -5,3 +5,4 @@ composer.lock
 Thumbs.db
 examples/.env
 examples/log/app.log
+.php_cs.cache
