@@ -6,7 +6,13 @@
     "keywords": [
         "coupons", 
         "random_bytes", 
-        "generator"
+        "generator",
+        "token",
+        "coupon",
+        "voucher",
+        "unique",
+        "simple",
+        "simple coupon"
     ],
     "support": {
         "issues": "https://github.com/iwouldrathercode/php-simple-coupons/issues",
