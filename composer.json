@@ -1,11 +1,11 @@
 {
     "name": "iwouldrathercode/php-simple-coupons",
-    "description": "PHP package to help generates simple and unique coupon codes",
+    "description": "PHP package to help generates simple and unique coupon codes using random_bytes",
     "type": "library",
     "license": "MIT",
     "keywords": [
         "coupons", 
-        "uniqd", 
+        "random_bytes", 
         "generator"
     ],
     "support": {
@@ -19,12 +19,12 @@
         }
     ],
     "require": {
-        "php": ">=7.0",
-        "monolog/monolog": "^1.24",
-        "symfony/var-dumper": "^4.1"
+        "php": ">=7.0"
     },
     "require-dev": {
-        "phpunit/phpunit" : "7.4.4"
+        "phpunit/phpunit" : "7.4.4",
+        "symfony/var-dumper": "^4.1",
+        "jakub-onderka/php-console-color": "^0.2.0"
     },
     "autoload": {
         "psr-4" : {
