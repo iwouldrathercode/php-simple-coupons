@@ -25,3 +25,7 @@ echo $coloredOutput->apply("color_15", $coupon.PHP_EOL);
 echo $coloredOutput->apply("color_11", "Simple unique coupon code only with a prefix of ABC and suffix of XYZ and max. char. length as - 10".PHP_EOL);
 $coupon = $code->limit(10)->generate();
 echo $coloredOutput->apply("color_15", $coupon.PHP_EOL);
+
+echo $coloredOutput->apply("color_11", "Simple unique coupon code only with a prefix, suffix, max. char. length as - 10, allow 0 if string contains 0, deny if string contains I".PHP_EOL);
+$coupon = $code->allow(['0'])->deny(['I'])->limit(10)->generate();
+echo $coloredOutput->apply("color_15", $coupon.PHP_EOL);
