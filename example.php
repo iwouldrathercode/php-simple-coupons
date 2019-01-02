@@ -6,7 +6,7 @@ require('vendor/autoload.php');
 
 use Iwouldrathercode\SimpleCoupons\Coupon;
 use JakubOnderka\PhpConsoleColor\ConsoleColor;
-
+/*
 $code = new Coupon();
 $coloredOutput = new ConsoleColor();
 
@@ -29,3 +29,24 @@ echo $coloredOutput->apply("color_15", $coupon.PHP_EOL);
 echo $coloredOutput->apply("color_11", "Simple unique coupon code only with a prefix, suffix, max. char. length as - 10, allow 0 if string contains 0, deny if string contains I".PHP_EOL);
 $coupon = $code->allow(['0'])->deny(['I'])->limit(10)->generate();
 echo $coloredOutput->apply("color_15", $coupon.PHP_EOL);
+*/
+
+for($i=1; $i<=10000000; $i++) {
+    $code = new Coupon();
+    $coloredOutput = new ConsoleColor();
+    $coupon = $code->limit(12)->generate();
+    //echo $coloredOutput->apply("color_15", $coupon.PHP_EOL);
+    $array[] = $coupon;
+    $code = null;
+}
+
+if(count(array_unique($array))<count($array))
+{
+    echo $coloredOutput->apply("color_15", 'Array has duplicates');
+}
+else
+{
+    echo $coloredOutput->apply("color_15", 'Array does not have duplicates');
+}
+
+

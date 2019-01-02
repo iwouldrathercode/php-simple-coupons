@@ -186,4 +186,9 @@ class Coupon
 
         return false;
     }
+
+    public function flush()
+    {
+        $this->outputString = null;
+    }
 }
