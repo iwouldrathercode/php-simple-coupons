@@ -187,8 +187,8 @@ class Coupon
         return false;
     }
 
-    public function flush()
+    public function __destruct()
     {
-        $this->outputString = null;
+        unset($this->outputString);
     }
 }
