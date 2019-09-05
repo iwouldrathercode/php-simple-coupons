@@ -106,7 +106,8 @@ class Coupon
      */
     public function allow($chars)
     {
-        $this->allowedChars = $chars;
+        $implodedChars = implode("", $chars);
+        array_push($this->allowedChars, $implodedChars);
         return $this;
     }
 
@@ -118,7 +119,8 @@ class Coupon
      */
     public function deny($chars)
     {
-        $this->deniedChars = $chars;
+        $implodedChars = implode("", $chars);
+        array_push($this->deniedChars, $implodedChars);
         return $this;
     }
 
@@ -176,12 +178,12 @@ class Coupon
         if (empty($this->outputString)) {
             return false;
         }
-
+        
         $implodedAllowedChars = implode("", $this->allowedChars);
         $implodedDeniedChars = implode("", $this->deniedChars);
         
-        if (strpbrk($this->outputString, $implodedAllowedChars) !== false) {
-            return (strpbrk($implodedDeniedChars, $this->outputString) === false);
+        if (strpbrk($this->outputString, $implodedAllowedChars) === false) {
+            return (strpbrk($implodedDeniedChars, $this->outputString) !== false);
         }
 
         return false;
