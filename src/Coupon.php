@@ -188,4 +188,9 @@ class Coupon
 
         return false;
     }
+
+    public function __destruct()
+    {
+        unset($this->outputString);
+    }
 }
