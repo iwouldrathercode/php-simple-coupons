@@ -6,7 +6,6 @@
     PHP package to help generates simple and unique coupon codes
 </h4>
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/iwouldrathercode/php-simple-coupons.svg?style=flat-square)](https://packagist.org/packages/iwouldrathercode/php-simple-coupons)
 [![Total Downloads](https://img.shields.io/packagist/dt/iwouldrathercode/php-simple-coupons.svg?style=flat-square)](https://packagist.org/packages/iwouldrathercode/php-simple-coupons)
 
 ## Installation
