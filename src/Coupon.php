@@ -39,27 +39,6 @@ class Coupon
      */
     public $iterationLimit = 20;
 
-    /**
-     * Alphabets allowed when generating codes.
-     *
-     * @var Array
-     */
-    public $allowedChars = [
-        'A','B','C','D','E','F','G','H','J',
-        'K','L','M','N','P','Q','R','S','T',
-        'U','V','W','X','Y','Z','1','2','3',
-        '4','5','6','7','8','9'
-    ];
-
-    /**
-     * Alphabets denied when generating codes.
-     *
-     * @var Array
-     */
-    protected $deniedChars = [
-        'I','O','0'
-    ];
-
     public function __construct()
     {
         //
@@ -99,32 +78,6 @@ class Coupon
     }
 
     /**
-     * Setter for configuring allowed characters array
-     *
-     * @param Array
-     * @return Object
-     */
-    public function allow($chars)
-    {
-        $implodedChars = implode("", $chars);
-        array_push($this->allowedChars, $implodedChars);
-        return $this;
-    }
-
-    /**
-     * Setter for configuring denied characters array
-     *
-     * @param Array
-     * @return Object
-     */
-    public function deny($chars)
-    {
-        $implodedChars = implode("", $chars);
-        array_push($this->deniedChars, $implodedChars);
-        return $this;
-    }
-
-    /**
      * Master method to output the generated coupon code with prefixes and suffixes
      *
      * @return String
@@ -151,7 +104,6 @@ class Coupon
             // Incrementing the iteration count
             $iterations++;
         }
-
         
         $uniqiCode = $this->outputString;
         return $this->prefix.$uniqiCode.$this->suffix;
@@ -189,8 +141,10 @@ class Coupon
             if (ctype_digit("".$this->outputString)) {
                 return false;
             } else {
-                // echo "all okay"; --- Extend to check output has 0 or I or O
-                return true;
+                if( strpos($this->outputString, 'I') === false && strpos($this->outputString, 'O') === false && strpos($this->outputString, '0') === false ) {
+                    return true;
+                }
+                return false;
             }
         }
 
