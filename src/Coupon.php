@@ -145,13 +145,15 @@ class Coupon
             // Churn / Generates the random string
             $this->churn($length);
 
+            if($this->validate() === true) {
+                break;
+            }
             // Incrementing the iteration count
             $iterations++;
         }
 
-        // Need to substr as the output hex string of a bin random string
-        // http://php.net/manual/en/function.random-bytes.php
-        $uniqiCode = substr($this->outputString, 0, $length);
+        
+        $uniqiCode = $this->outputString;
         return $this->prefix.$uniqiCode.$this->suffix;
     }
 
@@ -163,7 +165,9 @@ class Coupon
      */
     public function churn($length)
     {
-        $this->outputString = strtoupper(bin2hex(random_bytes($length)));
+        // Need to substr as the output hex string of a bin random string
+        // http://php.net/manual/en/function.random-bytes.php
+        $this->outputString = substr(strtoupper(bin2hex(random_bytes($length))), 0, $length);
     }
 
     /**
@@ -179,11 +183,15 @@ class Coupon
             return false;
         }
         
-        $implodedAllowedChars = implode("", $this->allowedChars);
-        $implodedDeniedChars = implode("", $this->deniedChars);
-        
-        if (strpbrk($this->outputString, $implodedAllowedChars) === false) {
-            return (strpbrk($implodedDeniedChars, $this->outputString) !== false);
+        if (ctype_alpha($this->outputString)) {
+            return true;
+        } else {
+            if (ctype_digit("".$this->outputString)) {
+                return false;
+            } else {
+                // echo "all okay"; --- Extend to check output has 0 or I or O
+                return true;
+            }
         }
 
         return false;
