@@ -37,10 +37,6 @@ $coupon = $code->prepend('ABC')->append('XYZ')->generate();
 
 // Coupon code with a prefix of `ABC` and suffix of `XYZ` and max. char. length as - 10
 $coupon = $code->limit(10)->generate();
-
-// Coupon code with a prefix, suffix, max. char. length as - 10, allow 0 if string contains 0, deny if string contains `I`
-$coupon = $code->allow(['0'])->deny(['I'])->limit(10)->generate();
-
 .
 .
 ```

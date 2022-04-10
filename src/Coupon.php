@@ -39,27 +39,6 @@ class Coupon
      */
     public $iterationLimit = 20;
 
-    /**
-     * Alphabets allowed when generating codes.
-     *
-     * @var Array
-     */
-    public $allowedChars = [
-        'A','B','C','D','E','F','G','H','J',
-        'K','L','M','N','P','Q','R','S','T',
-        'U','V','W','X','Y','Z','1','2','3',
-        '4','5','6','7','8','9'
-    ];
-
-    /**
-     * Alphabets denied when generating codes.
-     *
-     * @var Array
-     */
-    protected $deniedChars = [
-        'I','O','0'
-    ];
-
     public function __construct()
     {
         //
@@ -99,32 +78,6 @@ class Coupon
     }
 
     /**
-     * Setter for configuring allowed characters array
-     *
-     * @param Array
-     * @return Object
-     */
-    public function allow($chars)
-    {
-        $implodedChars = implode("", $chars);
-        array_push($this->allowedChars, $implodedChars);
-        return $this;
-    }
-
-    /**
-     * Setter for configuring denied characters array
-     *
-     * @param Array
-     * @return Object
-     */
-    public function deny($chars)
-    {
-        $implodedChars = implode("", $chars);
-        array_push($this->deniedChars, $implodedChars);
-        return $this;
-    }
-
-    /**
      * Master method to output the generated coupon code with prefixes and suffixes
      *
      * @return String
@@ -145,13 +98,14 @@ class Coupon
             // Churn / Generates the random string
             $this->churn($length);
 
+            if($this->validate() === true) {
+                break;
+            }
             // Incrementing the iteration count
             $iterations++;
         }
-
-        // Need to substr as the output hex string of a bin random string
-        // http://php.net/manual/en/function.random-bytes.php
-        $uniqiCode = substr($this->outputString, 0, $length);
+        
+        $uniqiCode = $this->outputString;
         return $this->prefix.$uniqiCode.$this->suffix;
     }
 
@@ -163,7 +117,9 @@ class Coupon
      */
     public function churn($length)
     {
-        $this->outputString = strtoupper(bin2hex(random_bytes($length)));
+        // Need to substr as the output hex string of a bin random string
+        // http://php.net/manual/en/function.random-bytes.php
+        $this->outputString = substr(strtoupper(bin2hex(random_bytes($length))), 0, $length);
     }
 
     /**
@@ -179,11 +135,17 @@ class Coupon
             return false;
         }
         
-        $implodedAllowedChars = implode("", $this->allowedChars);
-        $implodedDeniedChars = implode("", $this->deniedChars);
-        
-        if (strpbrk($this->outputString, $implodedAllowedChars) === false) {
-            return (strpbrk($implodedDeniedChars, $this->outputString) !== false);
+        if (ctype_alpha($this->outputString)) {
+            return true;
+        } else {
+            if (ctype_digit("".$this->outputString)) {
+                return false;
+            } else {
+                if( strpos($this->outputString, 'I') === false && strpos($this->outputString, 'O') === false && strpos($this->outputString, '0') === false ) {
+                    return true;
+                }
+                return false;
+            }
         }
 
         return false;
