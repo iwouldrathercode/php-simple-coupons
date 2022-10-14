@@ -1,12 +1,9 @@
-<h1 align="center">
-  PHP SIMPLE COUPONS
-  <br>
-</h1>
-<h4 align="center">
-    PHP package to help generates simple and unique coupon codes
-</h4>
+# iwouldrathercode/php-simple-coupons
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/iwouldrathercode/cognito.svg?style=flat-square)](https://packagist.org/packages/iwouldrathercode/php-simple-coupons)
 [![Total Downloads](https://img.shields.io/packagist/dt/iwouldrathercode/php-simple-coupons.svg?style=flat-square)](https://packagist.org/packages/iwouldrathercode/php-simple-coupons)
+
+PHP package to help generates simple and unique coupon codes.
 
 ## Installation
 ```bash
